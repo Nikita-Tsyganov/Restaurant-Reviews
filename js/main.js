@@ -1,9 +1,15 @@
 let restaurants,
-  neighborhoods,
-  cuisines
-var map
-var markers = []
+    neighborhoods,
+    cuisines;
+var map;
+var markers = [];
 
+/**
+ * Registering a Service Worker if supported.
+ */
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register("./sw.js", {scope: './'})
+}
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
@@ -24,7 +30,7 @@ fetchNeighborhoods = () => {
       fillNeighborhoodsHTML();
     }
   });
-}
+};
 
 /**
  * Set neighborhoods HTML.
@@ -37,7 +43,7 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     option.value = neighborhood;
     select.append(option);
   });
-}
+};
 
 /**
  * Fetch all cuisines and set their HTML.
@@ -51,7 +57,7 @@ fetchCuisines = () => {
       fillCuisinesHTML();
     }
   });
-}
+};
 
 /**
  * Set cuisines HTML.
@@ -65,7 +71,7 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
     option.value = cuisine;
     select.append(option);
   });
-}
+};
 
 /**
  * Initialize Google map, called from HTML.
@@ -81,7 +87,7 @@ window.initMap = () => {
     scrollwheel: false
   });
   updateRestaurants();
-}
+};
 
 /**
  * Update page and map for current restaurants.
@@ -104,7 +110,7 @@ updateRestaurants = () => {
       fillRestaurantsHTML();
     }
   })
-}
+};
 
 /**
  * Clear current restaurants, their HTML and remove their map markers.
@@ -115,11 +121,16 @@ resetRestaurants = (restaurants) => {
   const ul = document.getElementById('restaurants-list');
   ul.innerHTML = '';
 
+  //Reset last row margin adjustments. Needed for function arrangeLastLineOfRestaurants.
+  isAdjustmentForBigViewportPerformed = false;
+  isAdjustmentForMediumViewportPerformed = false;
+  isAdjustmentForSmallViewportPerformed = false;
+
   // Remove all map markers
   self.markers.forEach(m => m.setMap(null));
   self.markers = [];
   self.restaurants = restaurants;
-}
+};
 
 /**
  * Create all restaurants HTML and add them to the webpage.
@@ -129,8 +140,9 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     ul.append(createRestaurantHTML(restaurant));
   });
+  arrangeLastLineOfRestaurants();
   addMarkersToMap();
-}
+};
 
 /**
  * Create restaurant HTML.
@@ -141,6 +153,7 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = "Picture of restaurant " + restaurant.name + " with " + restaurant.cuisine_type + " cuisine.";
   li.append(image);
 
   const name = document.createElement('h1');
@@ -158,10 +171,10 @@ createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  li.append(more);
 
-  return li
-}
+  return li;
+};
 
 /**
  * Add markers for current restaurants to the map.
@@ -175,4 +188,94 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     });
     self.markers.push(marker);
   });
+};
+
+//Dynamically arranges restaurant items in the last row using margin parameter.
+function arrangeLastLineOfRestaurants() {
+  const restaurantsList = document.querySelectorAll("#restaurants-list li");
+  const excessiveItemsRowOfThree = restaurantsList.length % 3;
+  const excessiveItemsRowOfTwo = restaurantsList.length % 2;
+  if (excessiveItemsRowOfThree === 0 && excessiveItemsRowOfTwo === 0)  return;
+  const isViewportBig = window.innerWidth >= 1122;
+  const isViewportMedium = window.innerWidth >= 758 && window.innerWidth < 1122;
+  const isViewportSmall = window.innerWidth < 758;
+
+  if (isViewportBig) {
+
+    if (isAdjustmentForBigViewportPerformed) return;
+
+    if (isAdjustmentForMediumViewportPerformed) {
+        toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfTwo, 2);
+        isAdjustmentForMediumViewportPerformed = false;
+    }
+
+    if (excessiveItemsRowOfThree !== 0) toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfThree, 3);
+    isAdjustmentForBigViewportPerformed = true;
+    isAdjustmentForSmallViewportPerformed = false;
+  }
+
+  if (isViewportMedium) {
+
+    if (isAdjustmentForMediumViewportPerformed) return;
+
+    if (isAdjustmentForBigViewportPerformed) {
+        toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfThree, 3);
+        isAdjustmentForBigViewportPerformed = false;
+    }
+
+    if (excessiveItemsRowOfTwo !== 0) toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfTwo, 2);
+    isAdjustmentForMediumViewportPerformed = true;
+    isAdjustmentForSmallViewportPerformed = false;
+  }
+
+  if (isViewportSmall) {
+
+    if (isAdjustmentForSmallViewportPerformed) return;
+
+    if (isAdjustmentForMediumViewportPerformed) {
+        toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfTwo, 2);
+        isAdjustmentForMediumViewportPerformed = false;
+    }
+    if (isAdjustmentForBigViewportPerformed) {
+        toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfThree, 3);
+        isAdjustmentForBigViewportPerformed = false;
+    }
+    isAdjustmentForSmallViewportPerformed = true;
+  }
 }
+
+//Toggles class with margin parameters for last elements from array depending on amount of items in a row.
+function toggleMarginOfLastRowElements (elementsArr, numberOfElements, rowCapacity) {
+
+    let classToApply = "";
+
+    switch(rowCapacity) {
+        case 2:
+            classToApply = "row-of-two-excessive-items-margin-arrangement";
+            break;
+        case 3:
+            classToApply = "row-of-three-excessive-items-margin-arrangement";
+            break;
+    }
+
+    for (let i = 0; i < numberOfElements; i++) {
+        let item = elementsArr[elementsArr.length - 1 - i];
+        item.classList.toggle(classToApply);
+    }
+}
+
+//Variables necessary for arrangeLastLineOfRestaurants function
+let isAdjustmentForBigViewportPerformed = false;
+let isAdjustmentForMediumViewportPerformed = false;
+let isAdjustmentForSmallViewportPerformed = false;
+//Event listener for resize to dynamically arrange the margin of restaurant items.
+window.addEventListener("resize", arrangeLastLineOfRestaurants);
+
+window.onload = function () {
+    //Accessibility feature
+    const iframe = document.body.querySelector('iframe');
+    iframe.title = "Google Maps";
+
+    //Fix margin of restaurant items on load if applicable.
+    arrangeLastLineOfRestaurants();
+};
