@@ -275,6 +275,7 @@ window.onload = function () {
     //Accessibility feature
     const iframe = document.body.querySelector('iframe');
     iframe.title = "Google Maps";
+    iframe.setAttribute("tabindex", "-1");
 
     //Fix margin of restaurant items on load if applicable.
     arrangeLastLineOfRestaurants();

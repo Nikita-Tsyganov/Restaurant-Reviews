@@ -19,7 +19,7 @@
   --main-font-color: #333;
   --dark-bg-color: #333;
   --restaurant-hours-color: #666;
-  --rating-text-shadow-color: #666;
+  --text-shadow-color: #666;
   --theme-headers-text-shadow-color: #ddd;
 }
 
@@ -66,9 +66,14 @@ a {
 
 
 a:hover,
-a:focus {
+a:focus,
+button:hover,
+button:focus,
+div[role="button"]:hover,
+div[role="button"]:focus {
 	color: var(--theme-darken-color);
 	text-decoration: none;
+    outline-color: var(--theme-color);
 }
 
 
@@ -128,7 +133,6 @@ section {
 nav {
   background-color: var(--nav-bg-color);
   text-align: center;
-  height: 80px;
 }
 
 
@@ -303,6 +307,7 @@ nav h1 a {
   text-transform: uppercase;
   border-radius: 20px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  text-shadow: 1px 1px var(--text-shadow-color);
 }
 
 
@@ -440,7 +445,7 @@ nav h1 a {
   border-radius: 0 10px;
   color: var(--light-lighten-color);
   background-color: var(--theme-color);
-  text-shadow: 1px 1px var(--rating-text-shadow-color);
+  text-shadow: 1px 1px var(--text-shadow-color);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
 }
 
@@ -519,6 +524,7 @@ nav h1 a {
 @media screen and (max-width: 449px) {
   nav h1 a {
     padding-top: 13px;
+    padding-bottom: 13px;
   }
 }
 
