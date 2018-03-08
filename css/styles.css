@@ -433,13 +433,13 @@ nav h1 a {
 }
 
 
-#review-header {
+.review-header {
   overflow: auto;
   background-color: var(--dark-bg-color);
 }
 
 
-#review-rating {
+.review-rating {
   display: inline;
   padding: 5px;
   border-radius: 0 10px;
@@ -450,13 +450,13 @@ nav h1 a {
 }
 
 
-#review-name,
-#review-date {
+.review-name,
+.review-date {
   text-shadow: 1px 1px var(--solid-black-color);
 }
 
 
-#review-name {
+.review-name {
   color: var(--light-lighten-color);
   float: left;
   font-size: 1.2rem;
@@ -464,7 +464,7 @@ nav h1 a {
 }
 
 
-#review-date {
+.review-date {
   color: var(--solid-gray-color);
   float: right;
   margin: 2em 2em 2em 0 !important;
@@ -541,7 +541,7 @@ nav h1 a {
   #restaurants-list li {
     width: calc(50% - 102px);
   }
-  #review-rating, #review-comments {
+  .review-rating, .review-comments {
     font-size: 1.2em;
   }
 }

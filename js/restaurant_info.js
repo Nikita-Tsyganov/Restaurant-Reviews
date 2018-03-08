@@ -58,10 +58,11 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.alt = restaurant.name + " " + restaurant.cuisine_type;
+  image.alt = "Picture of restaurant " + restaurant.name;
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
+  cuisine.setAttribute("aria-label", "The restaurant's cuisine is " + restaurant.cuisine_type);
 
   // fill operating hours
   if (restaurant.operating_hours) {
@@ -120,27 +121,27 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
 
   const header = document.createElement('h1');
-  header.id = "review-header";
+  header.classList.add("review-header");
   li.appendChild(header);
 
   const name = document.createElement('p');
   name.innerHTML = review.name;
-  name.id = "review-name";
+  name.classList.add("review-name");
   header.appendChild(name);
 
   const date = document.createElement('p');
   date.innerHTML = review.date;
-  date.id = "review-date";
+  date.classList.add("review-date");
   header.appendChild(date);
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
-  rating.id = "review-rating";
+  rating.classList.add("review-rating");
   li.appendChild(rating);
 
   const comments = document.createElement('p');
   comments.innerHTML = review.comments;
-  comments.id = "review-comments";
+  comments.classList.add("review-comments");
   li.appendChild(comments);
 
   return li;
