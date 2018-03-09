@@ -178,10 +178,26 @@ getParameterByName = (name, url) => {
 };
 
 window.onload = function () {
-    //Accessibility features
-    const iframe = document.body.querySelector('iframe');
+
+    //Accessibility feature
+    const iframe = document.querySelector('iframe');
     iframe.title = "Google Maps";
-    iframe.setAttribute("tabindex", "-1");
-    //Remove focus from Google Map markers
-    document.body.querySelector('#map div[tabindex="0"]').setAttribute("tabindex", "-1");
+
+    //Preventing Google Maps from being focused
+    const currentPageLink = document.querySelector('#breadcrumb a[aria-current="page"]');
+    const footerLink = document.querySelector("footer a");
+    currentPageLink.onkeydown = function (event) {
+        console.log(event.keyCode);
+        if(!event.shiftKey && event.keyCode === 9) {
+            event.preventDefault();
+            footerLink.focus();
+        }
+    };
+    footerLink.onkeydown = function (event) {
+        console.log(event.keyCode);
+        if(event.shiftKey && event.keyCode === 9) {
+            event.preventDefault();
+            currentPageLink.focus();
+        }
+    };
 };

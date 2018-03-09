@@ -273,13 +273,29 @@ let isAdjustmentForSmallViewportPerformed = false;
 window.addEventListener("resize", arrangeLastLineOfRestaurants);
 
 window.onload = function () {
-    //Accessibility features
-    const iframe = document.body.querySelector('iframe');
-    iframe.title = "Google Maps";
-    iframe.setAttribute("tabindex", "-1");
-    //Remove focus from Google Map markers
-    document.body.querySelector('#map div[tabindex="0"]').setAttribute("tabindex", "-1");
 
     //Fix margin of restaurant items on load if applicable.
     arrangeLastLineOfRestaurants();
+
+    //Accessibility feature
+    const iframe = document.querySelector('iframe');
+    iframe.title = "Google Maps";
+
+    //Preventing Google Maps from being focused
+    const siteHeader = document.querySelector("header nav h1 a");
+    const neighborhoodsSelect = document.getElementById("neighborhoods-select");
+    siteHeader.onkeydown = function (event) {
+      console.log(event.keyCode);
+      if(!event.shiftKey && event.keyCode === 9) {
+        event.preventDefault();
+        neighborhoodsSelect.focus();
+      }
+    };
+    neighborhoodsSelect.onkeydown = function (event) {
+        console.log(event.keyCode);
+        if(event.shiftKey && event.keyCode === 9) {
+            event.preventDefault();
+            siteHeader.focus();
+        }
+    };
 };
