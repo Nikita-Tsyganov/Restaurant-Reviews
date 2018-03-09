@@ -153,10 +153,10 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.alt = "Picture of restaurant " + restaurant.name + " with " + restaurant.cuisine_type + " cuisine.";
+  image.alt = "Restaurant " + restaurant.name + " with " + restaurant.cuisine_type + " cuisine.";
   li.append(image);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h3');
   name.innerHTML = restaurant.name;
   li.append(name);
 
@@ -273,10 +273,12 @@ let isAdjustmentForSmallViewportPerformed = false;
 window.addEventListener("resize", arrangeLastLineOfRestaurants);
 
 window.onload = function () {
-    //Accessibility feature
+    //Accessibility features
     const iframe = document.body.querySelector('iframe');
     iframe.title = "Google Maps";
     iframe.setAttribute("tabindex", "-1");
+    //Remove focus from Google Map markers
+    document.body.querySelector('#map div[tabindex="0"]').setAttribute("tabindex", "-1");
 
     //Fix margin of restaurant items on load if applicable.
     arrangeLastLineOfRestaurants();

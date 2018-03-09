@@ -58,7 +58,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.alt = "Picture of restaurant " + restaurant.name;
+  image.alt = "Restaurant " + restaurant.name;
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -97,7 +97,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
  */
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
-  const title = document.createElement('h2');
+  const title = document.createElement('h3');
   title.innerHTML = 'Reviews';
   container.appendChild(title);
 
@@ -120,7 +120,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
 createReviewHTML = (review) => {
   const li = document.createElement('li');
 
-  const header = document.createElement('h1');
+  const header = document.createElement('h4');
   header.classList.add("review-header");
   li.appendChild(header);
 
@@ -178,7 +178,10 @@ getParameterByName = (name, url) => {
 };
 
 window.onload = function () {
+    //Accessibility features
     const iframe = document.body.querySelector('iframe');
     iframe.title = "Google Maps";
     iframe.setAttribute("tabindex", "-1");
+    //Remove focus from Google Map markers
+    document.body.querySelector('#map div[tabindex="0"]').setAttribute("tabindex", "-1");
 };

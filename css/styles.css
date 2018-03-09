@@ -271,12 +271,11 @@ nav h1 a {
   display: block;
   margin: 20px 0;
   max-width: 100%;
-  min-height: 248px;
   min-width: 100%;
 }
 
 
-#restaurants-list li h1 {
+#restaurants-list li h3 {
   text-shadow: 0.5px 0.5px var(--solid-black-color);
   color: var(--theme-color);
   font-family: Arial,sans-serif;
@@ -399,7 +398,7 @@ nav h1 a {
 }
 
 
-#reviews-container h2 {
+#reviews-container h3 {
   text-shadow: 1px 1px var(--solid-black-color);
   color: var(--theme-color);
   font-size: 24pt;
@@ -488,12 +487,12 @@ nav h1 a {
 
 
 .row-of-three-excessive-items-margin-arrangement {
-  margin-right: 14.656px !important;
-  margin-left: 14.656px !important;
+  margin-right: 17px !important;
+  margin-left: 17px !important;
 }
 .row-of-two-excessive-items-margin-arrangement {
-  margin-right: 19px !important;
-  margin-left: 19px !important;
+  margin-right: 21px !important;
+  margin-left: 21px !important;
 }
 
 
