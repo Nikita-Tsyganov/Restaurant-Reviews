@@ -359,6 +359,7 @@ nav h1 a {
 
 #restaurant-img {
   width: 100%;
+  display: block;
 }
 
 
@@ -375,7 +376,7 @@ nav h1 a {
   font-size: 12pt;
   font-weight: 300;
   letter-spacing: 10px;
-  margin: -5px 0 0;
+  margin: 0;
   padding: 2px 0;
   text-align: center;
   text-transform: uppercase;

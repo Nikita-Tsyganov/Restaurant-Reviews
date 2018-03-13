@@ -2,6 +2,13 @@ let restaurant;
 var map;
 
 /**
+ * Registering a Service Worker if supported.
+ */
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register("./sw.js", {scope: './'})
+}
+
+/**
  * Initialize Google map, called from HTML.
  */
 window.initMap = () => {
@@ -14,7 +21,11 @@ window.initMap = () => {
         center: restaurant.latlng,
         scrollwheel: false
       });
-      fillBreadcrumb();
+      //Accessibility feature
+      google.maps.event.addListener(self.map, "tilesloaded", function() {
+          const iframe = document.querySelector('#map iframe');
+          iframe.title = "Google Maps";
+      });
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
     }
   });
@@ -40,6 +51,29 @@ fetchRestaurantFromURL = (callback) => {
         return;
       }
       fillRestaurantHTML();
+
+      //Fill breadcrumb and upon finish apply Google Map avoiding focus feature.
+      fillBreadcrumb()
+          .then(
+            aElement => {
+              const footerLink = document.querySelector("footer a");
+              aElement.onkeydown = function (event) {
+                  if(!event.shiftKey && event.keyCode === 9) {
+                      event.preventDefault();
+                      footerLink.focus();
+                  }
+              };
+              footerLink.onkeydown = function (event) {
+                  if(event.shiftKey && event.keyCode === 9) {
+                      event.preventDefault();
+                      aElement.focus();
+                  }
+              };
+            },
+            errMessage => {
+                console.log(errMessage);
+            }
+          );
       callback(null, restaurant)
     });
   }
@@ -148,17 +182,20 @@ createReviewHTML = (review) => {
 };
 
 /**
- * Add restaurant name to the breadcrumb navigation menu
+ *  Return a Promise adding restaurant name to the breadcrumb navigation menu
  */
 fillBreadcrumb = (restaurant=self.restaurant) => {
-  const breadcrumb = document.getElementById('breadcrumb');
-  const li = document.createElement('li');
-  const a = document.createElement('a');
-  a.href = window.location.href;
-  a.setAttribute("aria-current", "page");
-  a.innerHTML =  restaurant.name;
-  li.appendChild(a);
-  breadcrumb.appendChild(li);
+    return new Promise((resolve, reject) => {
+        const breadcrumb = document.getElementById('breadcrumb');
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = window.location.href;
+        a.setAttribute("aria-current", "page");
+        a.innerHTML =  restaurant.name;
+        li.appendChild(a);
+        breadcrumb.appendChild(li);
+        a.parentNode === li ? resolve(a) : reject("An error occurred while appending <a> to <li>");
+    });
 };
 
 /**
@@ -175,29 +212,4 @@ getParameterByName = (name, url) => {
   if (!results[2])
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
-};
-
-window.onload = function () {
-
-    //Accessibility feature
-    const iframe = document.querySelector('iframe');
-    iframe.title = "Google Maps";
-
-    //Preventing Google Maps from being focused
-    const currentPageLink = document.querySelector('#breadcrumb a[aria-current="page"]');
-    const footerLink = document.querySelector("footer a");
-    currentPageLink.onkeydown = function (event) {
-        console.log(event.keyCode);
-        if(!event.shiftKey && event.keyCode === 9) {
-            event.preventDefault();
-            footerLink.focus();
-        }
-    };
-    footerLink.onkeydown = function (event) {
-        console.log(event.keyCode);
-        if(event.shiftKey && event.keyCode === 9) {
-            event.preventDefault();
-            currentPageLink.focus();
-        }
-    };
 };

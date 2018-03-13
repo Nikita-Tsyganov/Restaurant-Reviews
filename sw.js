@@ -1,4 +1,4 @@
-const staticCacheName = 'rw-static-v1';
+const staticCacheName = 'rr-static-v1';
 
 
 self.addEventListener('install', function(event) {
@@ -26,7 +26,7 @@ self.addEventListener('activate', function(event) {
         caches.keys().then(function(cacheNames) {
             return Promise.all(
                 cacheNames.filter(function(cacheName) {
-                    return cacheName.startsWith('rw-') && cacheName !== staticCacheName;
+                    return cacheName.startsWith('rr-') && cacheName !== staticCacheName;
                 }).map(function(cacheName) {
                     return caches.delete(cacheName);
                 })

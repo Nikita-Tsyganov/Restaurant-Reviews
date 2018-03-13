@@ -86,6 +86,11 @@ window.initMap = () => {
     center: loc,
     scrollwheel: false
   });
+  //Accessibility feature
+  google.maps.event.addListener(self.map, "tilesloaded", function() {
+    const iframe = document.querySelector('#map iframe');
+    iframe.title = "Google Maps";
+  });
   updateRestaurants();
 };
 
@@ -140,7 +145,10 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     ul.append(createRestaurantHTML(restaurant));
   });
+
+  //Fix margin of restaurant items if applicable.
   arrangeLastLineOfRestaurants();
+
   addMarkersToMap();
 };
 
@@ -272,27 +280,18 @@ let isAdjustmentForSmallViewportPerformed = false;
 //Event listener for resize to dynamically arrange the margin of restaurant items.
 window.addEventListener("resize", arrangeLastLineOfRestaurants);
 
-window.onload = function () {
-
-    //Fix margin of restaurant items on load if applicable.
-    arrangeLastLineOfRestaurants();
-
-    //Accessibility feature
-    const iframe = document.querySelector('iframe');
-    iframe.title = "Google Maps";
+window.onload = () => {
 
     //Preventing Google Maps from being focused
     const siteHeader = document.querySelector("header nav h1 a");
     const neighborhoodsSelect = document.getElementById("neighborhoods-select");
     siteHeader.onkeydown = function (event) {
-      console.log(event.keyCode);
       if(!event.shiftKey && event.keyCode === 9) {
         event.preventDefault();
         neighborhoodsSelect.focus();
       }
     };
     neighborhoodsSelect.onkeydown = function (event) {
-        console.log(event.keyCode);
         if(event.shiftKey && event.keyCode === 9) {
             event.preventDefault();
             siteHeader.focus();
