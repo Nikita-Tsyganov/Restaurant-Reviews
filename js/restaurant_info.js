@@ -195,7 +195,7 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
         li.appendChild(a);
         breadcrumb.appendChild(li);
         a.parentNode === li ? resolve(a) : reject("An error occurred while appending <a> to <li>");
-    });
+    }).then(aElement => aElement, error => {console.log(error);});
 };
 
 /**
