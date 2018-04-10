@@ -2,12 +2,26 @@
 ---
 #### _Three Stage Course Material Project - Restaurant Reviews_
 
-# Project Overview: Stage 2
+# Project Overview: Stage 3
 
- I use minified files in this project, so in order to see the original ones, check the same folders with corresponding extensions.
- For `css` files go to `css` folder and find `main.css` and `restaurant_info.css`.
- For `js` files go to `js` folder and find `dbhelper.js`, `main.js` and `restaurant_info.js`. You also have `idb.js`, but that's just a library for IndexedDB Promised.
- For `html` files search in root directory for `index_dev.html` and `restaurant_dev.html`
- 
- At the moment I use `IndexedDB` to store only the restaurants from the server.
- I have done everything in my powers to improve the performance, but this matter is pretty random and depends heavily on server quality as well as Google Maps.
+Please, do not use suggested python server to run my project because it simply sucks and affects the performance dramatically.
+I use Windows IIS and recommend you to do the same or to pick any other analogue of your choice.
+<br>
+<br>
+I did my best to implement all the required features for stage 3.
+<br>
+<br>
+I have done everything in my powers to improve the performance, but Google Maps won't let me surpass score of 90
+(minifying files proved to has little to no impact on performance, but provides additional headaches, so I decided not to go for it)
+<br>
+<br>
+Without Google Maps I have performance score 98 on both index.html and restaurant.html
+<br>
+<br>
+Here are screenshots with proofs:
+<br>
+<br>
+Performance with Google Maps: https://ibb.co/nmpugc https://ibb.co/iBJWSH
+<br>
+Performance without Google Maps: https://ibb.co/cRKS1c https://ibb.co/ejFNZx
+
