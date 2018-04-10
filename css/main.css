@@ -73,7 +73,7 @@ div[role="button"]:hover,
 div[role="button"]:focus {
 	color: var(--theme-darken-color);
 	text-decoration: none;
-    outline-color: var(--theme-color);
+  outline-color: var(--theme-color);
 }
 
 
@@ -194,11 +194,6 @@ nav h1 a {
   height:  50%;
   margin: 0 2px 10px 2px;
   padding: 5px;
-}
-
-
-#neighborhoods-select,
-#cuisines-select {
   outline-color: var(--theme-color);
 }
 
@@ -278,6 +273,8 @@ nav h1 a {
   border-radius: 20px 0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
   text-shadow: 1px 1px var(--text-shadow-color);
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out;
 }
 
 
@@ -286,6 +283,7 @@ nav h1 a {
   outline: none;
   background-color: var(--theme-darken-color);
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.26);
+  transform: scale(1.1);
 }
 
 

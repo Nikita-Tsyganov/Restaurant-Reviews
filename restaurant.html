@@ -1,1 +1,109 @@
-<!DOCTYPE html><html lang="en"><head> <link rel="stylesheet" href="css/restaurant_info-min.css" type="text/css"> <link rel="manifest" href="manifest.json"> <link rel="shortcut icon" href="favicon.ico"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta name="theme-color" content="orange"> <meta charset="utf-8"> <title>Restaurant Info</title></head><body class="inside"> <header> <nav> <h1><a href="/">Restaurant Reviews</a></h1> <ul id="breadcrumb" aria-label="Breadcrumb"> <li><a href="/">Home</a></li></ul> </nav> </header> <main id="maincontent"> <section id="map-container"> <div id="map" role="application" aria-label="Google Maps with marks of restaurants"></div></section> <section id="restaurant-container"> <h2 id="restaurant-name"></h2> <div id="restaurant-overview"> <img id="restaurant-img"> <p id="restaurant-cuisine"></p></div><div id="restaurant-details"> <p id="restaurant-address"></p><table id="restaurant-hours"></table> </div></section> <section id="reviews-container"> <ul id="reviews-list"></ul> </section> </main> <footer id="footer"> Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved. </footer> <script type="text/javascript" src="js/app-restaurant-min.js"></script> <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBovvqHEV47g60VbcHW6auvSoaHxMhHQ2A&libraries=places&callback=initMap"></script> </body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Main CSS file -->
+  <link rel="stylesheet" href="css/restaurant_info.css" type="text/css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="shortcut icon" href="favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="orange">
+  <meta charset="utf-8">
+  <title>Restaurant Info</title>
+</head>
+
+<body class="inside">
+  <!-- Beginning header -->
+  <header>
+    <!-- Beginning nav -->
+    <nav>
+      <h1><a href="/">Restaurant Reviews</a></h1>
+      <!-- Beginning breadcrumb -->
+      <ul id="breadcrumb" aria-label="Breadcrumb">
+        <li><a href="/">Home</a></li>
+      </ul>
+      <!-- End breadcrumb -->
+    </nav>
+    <!-- End nav -->
+  </header>
+  <!-- End header -->
+
+  <!-- Beginning main -->
+  <main id="maincontent">
+    <!-- Beginning map -->
+    <section id="map-container">
+      <div id="map" role="application" aria-label="Google Maps with marks of restaurants"></div>
+    </section>
+    <!-- End map -->
+    <!-- Beginning restaurant -->
+    <section id="restaurant-container">
+      <div id="restaurant-header">
+        <h2 id="restaurant-name"></h2>
+        <div id="favorite-toggle-button-container"></div>
+      </div>
+      <div id="restaurant-overview">
+        <img id="restaurant-img">
+        <p id="restaurant-cuisine"></p>
+      </div>
+      <div id="restaurant-details">
+        <p id="restaurant-address"></p>
+        <table id="restaurant-hours"></table>
+      </div>
+    </section>
+    <!-- end restaurant -->
+    <!-- Beginning reviews -->
+    <section id="reviews-container">
+      <div id="reviews-header">
+        <h3>Reviews</h3>
+        <div id="form-toggle-button-container"></div>
+      </div>
+      <ul id="reviews-list">
+        <li id="review-form-container">
+          <form action="http://localhost:1337/reviews/" method="POST" id="review-form" aria-label="Write your own review" class="form-show">
+            <h4 class="review-header">
+              <p class="review-name">
+                <input type="text" name="name" id="review-form-name" placeholder="Enter your name" aria-label="Enter your name" required>
+              </p>
+              <div class="review-date-container">
+                <p class="review-date" id="review-form-date"></p>
+              </div>
+            </h4>
+            <p class="review-rating"><span>Rating:</span>
+              <select name="rating" id="review-form-rating" aria-label="Choose your rating" required>
+                <option value="" selected disabled hidden></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </p>
+            <p class="review-comments">
+              <textarea type="text" name="comments" id="review-form-comments" rows="5" placeholder="Share your experience" aria-label="Share your experience" required></textarea>
+            </p>
+            <button type="submit" id="submit-button">Submit your review</button>
+          </form>
+        </li>
+      </ul>
+    </section>
+    <!-- End reviews -->
+  </main>
+  <!-- End main -->
+
+  <!-- Beginning footer -->
+  <footer id="footer">
+    Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
+  </footer>
+  <!-- End footer -->
+
+  <!-- Beginning scripts -->
+  <script type="text/javascript" src="js/idb.js"></script>
+  <script type="text/javascript" src="js/dbhelper.js"></script>
+  <script type="text/javascript" src="js/restaurant_info.js"></script>
+  <!-- Google Maps -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBovvqHEV47g60VbcHW6auvSoaHxMhHQ2A&libraries=places&callback=initMap"></script>
+  <!-- End scripts -->
+
+</body>
+
+</html>

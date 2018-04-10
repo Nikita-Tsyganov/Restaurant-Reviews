@@ -77,21 +77,25 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
  * Initialize Google map, called from HTML.
  */
 window.initMap = () => {
-  let loc = {
-    lat: 40.722216,
-    lng: -73.987501
-  };
-  self.map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 12,
-    center: loc,
-    scrollwheel: false
+  new Promise(() => {
+    let loc = {
+      lat: 40.722216,
+      lng: -73.987501
+    };
+    self.map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: loc,
+      scrollwheel: false
+    });
+
+    updateRestaurants();
+
+    //Accessibility feature
+    google.maps.event.addListener(self.map, "tilesloaded", function() {
+      const iframe = document.querySelector('#map iframe');
+      iframe.title = "Google Maps";
+    });
   });
-  //Accessibility feature
-  google.maps.event.addListener(self.map, "tilesloaded", function() {
-    const iframe = document.querySelector('#map iframe');
-    iframe.title = "Google Maps";
-  });
-  updateRestaurants();
 };
 
 /**
@@ -146,6 +150,11 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
     ul.append(createRestaurantHTML(restaurant));
   });
 
+  //Lazy load the images
+  lazyLoad();
+  window.addEventListener('scroll', lazyLoad);
+  window.addEventListener('resize', lazyLoad);
+
   //Fix margin of restaurant items if applicable.
   arrangeLastLineOfRestaurants();
 
@@ -160,7 +169,8 @@ createRestaurantHTML = (restaurant) => {
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
-  image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  /*image.src = DBHelper.imageUrlForRestaurant(restaurant);*/
+  image.setAttribute('data-src', DBHelper.imageUrlForRestaurant(restaurant));
   image.alt = "Restaurant " + restaurant.name + " with " + restaurant.cuisine_type + " cuisine.";
   li.append(image);
 
@@ -199,7 +209,36 @@ addMarkersToMap = (restaurants = self.restaurants) => {
   });
 };
 
-//Dynamically arranges restaurant items in the last row using margin parameter.
+function isInViewport(element){
+  const rect = element.getBoundingClientRect();
+
+  return (
+    rect.bottom >= 0 &&
+    rect.right >= 0 &&
+
+    rect.top <= (
+      window.innerHeight ||
+      document.documentElement.clientHeight) &&
+
+    rect.left <= (
+      window.innerWidth ||
+      document.documentElement.clientWidth)
+  );
+}
+
+function lazyLoad(){
+  const images = document.querySelectorAll('img[data-src]');
+
+  for (const image of images) {
+    if(isInViewport(image)){
+      image.src = image.getAttribute('data-src');
+    }
+  }
+}
+
+/**
+ * Dynamically arranges restaurant items in the last row using margin parameter.
+ */
 function arrangeLastLineOfRestaurants() {
   const restaurantsList = document.querySelectorAll("#restaurants-list li");
   const excessiveItemsRowOfThree = restaurantsList.length % 3;
