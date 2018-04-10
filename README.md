@@ -4,24 +4,33 @@
 
 # Project Overview: Stage 3
 
-Please, do not use suggested python server to run my project because it simply sucks and affects the performance dramatically.
+##How to run the project itself
+Please, do not use suggested python server to run my project because it affects the performance dramatically in a bad way.
+<br>
 I use Windows IIS and recommend you to do the same or to pick any other analogue of your choice.
 <br>
+Guide for setting up a server with IIS: https://support.microsoft.com/en-us/help/323972/how-to-set-up-your-first-iis-web-site
 <br>
+Important: use IP address of localhost to set up the server. (127.0.0.1)
+
+##How to run a server for project
+Go to:
+<br>
+https://github.com/udacity/mws-restaurant-stage-3
+<br>
+Follow instructions
+
+##Project state
 I did my best to implement all the required features for stage 3.
 <br>
+Having Google Maps in page load made it impossible to achieve performance score higher than 90.
 <br>
-I have done everything in my powers to improve the performance, but Google Maps won't let me surpass score of 90
-(minifying files proved to has little to no impact on performance, but provides additional headaches, so I decided not to go for it)
+So my solution was to remove it from page completely and only show when requested by user.
 <br>
+Note: minifying files proved to has little to no impact on performance, but provides additional headaches, so I decided not to go for it.
+
+##My Lighthouse results running project on IIS server
+index.html: https://ibb.co/cwLXZx
 <br>
-Without Google Maps I have performance score 98 on both index.html and restaurant.html
-<br>
-<br>
-Here are screenshots with proofs:
-<br>
-<br>
-Performance with Google Maps: https://ibb.co/nmpugc https://ibb.co/iBJWSH
-<br>
-Performance without Google Maps: https://ibb.co/cRKS1c https://ibb.co/ejFNZx
+restaurant.html: https://ibb.co/jV3mux
 
