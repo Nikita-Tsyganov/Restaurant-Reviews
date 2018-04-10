@@ -127,6 +127,47 @@ section {
 }
 
 
+.button {
+  border: none;
+  cursor: pointer;
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out;
+  background-color: var(--theme-color);
+  color: var(--light-lighten-color) !important;
+  display: inline-block;
+  font-size: 10pt;
+  margin: 15px 0 0;
+  padding: 8px 30px 10px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 20px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  text-shadow: 1px 1px var(--text-shadow-color);
+}
+
+
+.button:hover,
+.button:focus {
+  outline: none;
+  text-decoration: none;
+  background-color: var(--theme-darken-color);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.26);
+  transform: scale(1.1);
+}
+
+
+.fade-away {
+  transform: scale(2) !important;
+  opacity: 0 !important;
+}
+
+
+.show {
+  display: block !important;
+}
+
+
 /* ====================== Navigation ====================== */
 
 
@@ -153,6 +194,11 @@ nav h1 a {
 
 
 /* ====================== Map ====================== */
+
+
+#map-container {
+  display: none;
+}
 
 
 #map {
@@ -200,6 +246,12 @@ nav h1 a {
 
 #cuisines-select {
   padding-right: 52px;
+}
+
+
+#show-map-button {
+  margin: 0 2px 10px 2px;
+  min-width: 158px;
 }
 
 

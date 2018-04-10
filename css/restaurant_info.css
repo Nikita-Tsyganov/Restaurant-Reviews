@@ -128,6 +128,47 @@ section {
 }
 
 
+.button {
+  border: none;
+  cursor: pointer;
+  transition-duration: .3s;
+  transition-timing-function: ease-in-out;
+  background-color: var(--theme-color);
+  color: var(--light-lighten-color) !important;
+  display: inline-block;
+  font-size: 10pt;
+  margin: 15px 0 0;
+  padding: 8px 30px 10px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 20px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  text-shadow: 1px 1px var(--text-shadow-color);
+}
+
+
+.button:hover,
+.button:focus {
+  outline: none;
+  text-decoration: none;
+  background-color: var(--theme-darken-color);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.26);
+  transform: scale(1.1);
+}
+
+
+.fade-away {
+  transform: scale(2) !important;
+  opacity: 0 !important;
+}
+
+
+.show {
+  display: block !important;
+}
+
+
 /* ====================== Navigation ====================== */
 
 
@@ -196,6 +237,11 @@ nav h1 a {
 /* ====================== Map ====================== */
 
 
+#map-container {
+  display: none;
+}
+
+
 #map {
   background-color: var(--solid-gray-color);
   height: 40vh;
@@ -227,6 +273,12 @@ nav h1 a {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
   overflow: hidden;
   margin-bottom: 20px;
+  width: 100%;
+}
+
+
+#restaurant-details {
+  width: 100%;
 }
 
 
@@ -239,6 +291,13 @@ nav h1 a {
 #restaurant-address {
   font-size: 12pt;
   margin: 10px 0;
+}
+
+
+#show-map-button {
+  margin: 0 0 0 20px;
+  border-radius: 0 20px;
+  min-width: 158px;
 }
 
 
@@ -303,12 +362,6 @@ nav h1 a {
 }
 
 
-.fade-away {
-  transform: scale(2) !important;
-  opacity: 0 !important;
-}
-
-
 .outline-remove {
   outline: 0 !important;
 }
@@ -355,61 +408,12 @@ nav h1 a {
 
 #form-toggle-button {
   float: right;
-  border: none;
-  cursor: pointer;
-  transition-duration: .3s;
-  transition-timing-function: ease-in-out;
-  background-color: var(--theme-color);
-  color: var(--light-lighten-color);
-  display: inline-block;
-  font-size: 10pt;
-  margin: 15px 0 0;
-  padding: 8px 30px 10px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  border-radius: 20px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-  text-shadow: 1px 1px var(--text-shadow-color);
-}
-
-
-#form-toggle-button:hover,
-#form-toggle-button:focus {
-  outline: none;
-  background-color: var(--theme-darken-color);
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.26);
-  transform: scale(1.1);
 }
 
 
 #submit-button {
   float: right;
-  border: none;
-  cursor: pointer;
-  transition-duration: .3s;
-  transition-timing-function: ease-in-out;
-  background-color: var(--theme-color);
-  color: var(--light-lighten-color);
-  display: inline-block;
-  font-size: 10pt;
   margin: -10px 2em 10px 0;
-  padding: 8px 30px 10px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  border-radius: 20px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-  text-shadow: 1px 1px var(--text-shadow-color);
-}
-
-
-#submit-button:hover,
-#submit-button:focus {
-  outline: none;
-  background-color: var(--theme-darken-color);
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.26);
-  transform: scale(1.1);
 }
 
 
@@ -448,11 +452,6 @@ nav h1 a {
 #review-form-comments {
   resize: none;
   width: 100%;
-}
-
-
-.form-show {
-  display: block !important;
 }
 
 
@@ -582,7 +581,6 @@ nav h1 a {
     float: left;
   }
 }
-
 
 
 @media screen and (max-width: 449px) {

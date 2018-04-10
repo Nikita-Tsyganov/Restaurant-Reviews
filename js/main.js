@@ -16,6 +16,27 @@ if ('serviceWorker' in navigator) {
 document.addEventListener('DOMContentLoaded', (event) => {
   fetchNeighborhoods();
   fetchCuisines();
+  updateRestaurants();
+
+  const showMapButton = document.getElementById('show-map-button');
+  showMapButton.addEventListener('click', event => {
+    event.preventDefault();
+
+    const showMapButton = event.target;
+    showMapButton.classList.add("fade-away");
+    setTimeout(() => showMapButton.parentNode.removeChild(showMapButton), 300);
+
+    const mapContainer = document.getElementById('map-container');
+    mapContainer.classList.add('show');
+    scroll(0, 0);
+
+    const script = document.createElement('script');
+    script.setAttribute('async', 'true');
+    script.setAttribute('defer', 'true');
+    script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBovvqHEV47g60VbcHW6auvSoaHxMhHQ2A&libraries=places&callback=initMap');
+    const lastScript = document.querySelector('script[src="js/main.js"]');
+    lastScript.parentNode.insertBefore(script, lastScript.nextSibling);
+  });
 });
 
 /**
@@ -88,7 +109,7 @@ window.initMap = () => {
       scrollwheel: false
     });
 
-    updateRestaurants();
+    addMarkersToMap();
 
     //Accessibility feature
     google.maps.event.addListener(self.map, "tilesloaded", function() {
@@ -158,7 +179,7 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   //Fix margin of restaurant items if applicable.
   arrangeLastLineOfRestaurants();
 
-  addMarkersToMap();
+  if (self.map) addMarkersToMap();
 };
 
 /**

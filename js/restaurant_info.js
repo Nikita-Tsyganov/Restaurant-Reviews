@@ -8,29 +8,50 @@ if ('serviceWorker' in navigator) {
     var serviceWorkerRegistration = navigator.serviceWorker.register("./sw.js", {scope: './'})
 }
 
+document.addEventListener('DOMContentLoaded', (event) => {
+  fetchRestaurantFromURL((error, restaurant) => {
+    if (error) { // Got an error!
+      console.error(error);
+    }
+  });
+  const showMapButton = document.getElementById('show-map-button');
+  showMapButton.addEventListener('click', event => {
+    event.preventDefault();
+
+    const showMapButton = event.target;
+    showMapButton.classList.add("fade-away");
+    setTimeout(() => showMapButton.parentNode.removeChild(showMapButton), 300);
+
+    const mapContainer = document.getElementById('map-container');
+    mapContainer.classList.add('show');
+    scroll(0, 0);
+
+    const script = document.createElement('script');
+    script.setAttribute('async', 'true');
+    script.setAttribute('defer', 'true');
+    script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBovvqHEV47g60VbcHW6auvSoaHxMhHQ2A&libraries=places&callback=initMap');
+    const lastScript = document.querySelector('script[src="js/restaurant_info.js"]');
+    lastScript.parentNode.insertBefore(script, lastScript.nextSibling);
+  });
+});
+
 /**
  * Initialize Google map, called from HTML.
  */
 window.initMap = () => {
-  fetchRestaurantFromURL((error, restaurant) => {
-    if (error) { // Got an error!
-      console.error(error);
-    } else {
-      new Promise(() => {
-        self.map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 16,
-          center: restaurant.latlng,
-          scrollwheel: false
-        });
+  new Promise(() => {
+    self.map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 16,
+      center: self.restaurant.latlng,
+      scrollwheel: false
+    });
 
-        DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+    DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
 
-        google.maps.event.addListener(self.map, "tilesloaded", function() {
-          const iframe = document.querySelector('#map iframe');
-          iframe.title = "Google Maps";
-        });
-      });
-    }
+    google.maps.event.addListener(self.map, "tilesloaded", function() {
+      const iframe = document.querySelector('#map iframe');
+      iframe.title = "Google Maps";
+    });
   });
 };
 
@@ -200,6 +221,7 @@ createFavoriteButton = (restaurant = self.restaurant) => {
  */
 createFormToggleButton = () => {
   const formToggleButton = document.createElement('button');
+  formToggleButton.classList.add('button');
   formToggleButton.setAttribute('id', 'form-toggle-button');
   formToggleButton.setAttribute('role', 'switch');
   formToggleButton.setAttribute('aria-checked', "false");
@@ -210,9 +232,9 @@ createFormToggleButton = () => {
     const button = event.target;
 
     const reviewFormContainer = document.getElementById('review-form-container');
-    reviewFormContainer.classList.toggle('form-show');
+    reviewFormContainer.classList.toggle('show');
 
-    const isShown = reviewFormContainer.classList.contains('form-show');
+    const isShown = reviewFormContainer.classList.contains('show');
 
     button.innerHTML = isShown ? 'Hide ▲' : 'Write a review ▼';
     const buttonContainer = document.getElementById('form-toggle-button-container');
