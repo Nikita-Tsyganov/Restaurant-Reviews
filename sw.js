@@ -61,7 +61,7 @@ self.addEventListener('sync', function (event) {
         const store = tx.objectStore('delayed-reviews');
         return store.getAll();
       }).then(reviews => {
-        postReviews(reviews);
+        return postReviews(reviews);
       }).catch(err => console.error(err))
     );
   }
@@ -72,6 +72,7 @@ self.addEventListener('sync', function (event) {
 
     event.waitUntil(
       toggleFavorite(restaurant_id, is_favorite)
+        .catch(err => console.error(err))
     );
   }
 });
@@ -107,9 +108,7 @@ postReviews = reviews => {
           store.delete(review.id);
         });
       } else console.log('Looks like there was a problem. Status Code: ' + response.status);
-    }).catch(function (error) {
-        console.log('Request failed', error);
-      });
+    })
   }));
 };
 
@@ -119,7 +118,5 @@ toggleFavorite = (restaurant_id, is_favorite) => {
       if (response.status === 200) {
         console.log('Put synced toggle favorite successfully ', response);
       } else console.log('Looks like there was a problem. Status Code: ' + response.status);
-    }).catch(function(err) {
-    console.log('Fetch Error :-S', err);
-  });
+    })
 };
