@@ -267,7 +267,7 @@ fillReviewsHTML = () => {
         const closeAlert = document.createElement('a');
         closeAlert.setAttribute('href', '');
         closeAlert.setAttribute('id', 'close-alert');
-        closeAlert.setAttribute('tabindex', '0');
+        closeAlert.setAttribute('role', 'button');
         closeAlert.setAttribute('aria-label', 'Got it. Close the alert.');
         closeAlert.innerHTML = 'Got it';
         closeAlert.addEventListener("click", (event) => {
