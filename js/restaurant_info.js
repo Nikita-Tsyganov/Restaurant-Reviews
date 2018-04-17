@@ -5,7 +5,7 @@ var map;
  * Registering a Service Worker if supported.
  */
 if ('serviceWorker' in navigator) {
-    var serviceWorkerRegistration = navigator.serviceWorker.register("./sw.js", {scope: './'})
+    var serviceWorkerRegistration = navigator.serviceWorker.register("sw.js");
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -157,6 +157,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
  */
 createFavoriteButton = (restaurant = self.restaurant) => {
   const favoriteButton = document.createElement('button');
+  restaurant.is_favorite = restaurant.is_favorite ? restaurant.is_favorite : false;
   favoriteButton.setAttribute('id', 'favorite-button');
   favoriteButton.setAttribute('role', 'switch');
   favoriteButton.setAttribute('aria-label', restaurant.is_favorite.toString() === 'true' ? 'Un-favorite this restaurant' : 'Favorite this restaurant');

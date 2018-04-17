@@ -8,7 +8,7 @@ var markers = [];
  * Registering a Service Worker if supported.
  */
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register("./sw.js", {scope: './'})
+  var serviceWorkerRegistration = navigator.serviceWorker.register("sw.js");
 }
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
@@ -176,9 +176,6 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
   window.addEventListener('scroll', lazyLoad);
   window.addEventListener('resize', lazyLoad);
 
-  //Fix margin of restaurant items if applicable.
-  arrangeLastLineOfRestaurants();
-
   if (self.map) addMarkersToMap();
 };
 
@@ -190,7 +187,6 @@ createRestaurantHTML = (restaurant) => {
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
-  /*image.src = DBHelper.imageUrlForRestaurant(restaurant);*/
   image.setAttribute('data-src', DBHelper.imageUrlForRestaurant(restaurant));
   image.alt = "Restaurant " + restaurant.name + " with " + restaurant.cuisine_type + " cuisine.";
   li.append(image);
@@ -250,95 +246,18 @@ function isInViewport(element){
 function lazyLoad(){
   const images = document.querySelectorAll('img[data-src]');
 
+  if (!images || images.length < 1) {
+    window.removeEventListener('scroll', lazyLoad);
+    window.removeEventListener('resize', lazyLoad);
+    return;
+  }
+
   for (const image of images) {
     if(isInViewport(image)){
       image.src = image.getAttribute('data-src');
     }
   }
 }
-
-/**
- * Dynamically arranges restaurant items in the last row using margin parameter.
- */
-function arrangeLastLineOfRestaurants() {
-  const restaurantsList = document.querySelectorAll("#restaurants-list li");
-  const excessiveItemsRowOfThree = restaurantsList.length % 3;
-  const excessiveItemsRowOfTwo = restaurantsList.length % 2;
-  if (excessiveItemsRowOfThree === 0 && excessiveItemsRowOfTwo === 0)  return;
-  const isViewportBig = window.innerWidth >= 1122;
-  const isViewportMedium = window.innerWidth >= 758 && window.innerWidth < 1122;
-  const isViewportSmall = window.innerWidth < 758;
-
-  if (isViewportBig) {
-
-    if (isAdjustmentForBigViewportPerformed) return;
-
-    if (isAdjustmentForMediumViewportPerformed) {
-        toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfTwo, 2);
-        isAdjustmentForMediumViewportPerformed = false;
-    }
-
-    if (excessiveItemsRowOfThree !== 0) toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfThree, 3);
-    isAdjustmentForBigViewportPerformed = true;
-    isAdjustmentForSmallViewportPerformed = false;
-  }
-
-  if (isViewportMedium) {
-
-    if (isAdjustmentForMediumViewportPerformed) return;
-
-    if (isAdjustmentForBigViewportPerformed) {
-        toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfThree, 3);
-        isAdjustmentForBigViewportPerformed = false;
-    }
-
-    if (excessiveItemsRowOfTwo !== 0) toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfTwo, 2);
-    isAdjustmentForMediumViewportPerformed = true;
-    isAdjustmentForSmallViewportPerformed = false;
-  }
-
-  if (isViewportSmall) {
-
-    if (isAdjustmentForSmallViewportPerformed) return;
-
-    if (isAdjustmentForMediumViewportPerformed) {
-        toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfTwo, 2);
-        isAdjustmentForMediumViewportPerformed = false;
-    }
-    if (isAdjustmentForBigViewportPerformed) {
-        toggleMarginOfLastRowElements(restaurantsList, excessiveItemsRowOfThree, 3);
-        isAdjustmentForBigViewportPerformed = false;
-    }
-    isAdjustmentForSmallViewportPerformed = true;
-  }
-}
-
-//Toggles class with margin parameters for last elements from array depending on amount of items in a row.
-function toggleMarginOfLastRowElements (elementsArr, numberOfElements, rowCapacity) {
-
-    let classToApply = "";
-
-    switch(rowCapacity) {
-        case 2:
-            classToApply = "row-of-two-excessive-items-margin-arrangement";
-            break;
-        case 3:
-            classToApply = "row-of-three-excessive-items-margin-arrangement";
-            break;
-    }
-
-    for (let i = 0; i < numberOfElements; i++) {
-        let item = elementsArr[elementsArr.length - 1 - i];
-        item.classList.toggle(classToApply);
-    }
-}
-
-//Variables necessary for arrangeLastLineOfRestaurants function
-let isAdjustmentForBigViewportPerformed = false;
-let isAdjustmentForMediumViewportPerformed = false;
-let isAdjustmentForSmallViewportPerformed = false;
-//Event listener for resize to dynamically arrange the margin of restaurant items.
-window.addEventListener("resize", arrangeLastLineOfRestaurants);
 
 window.onload = () => {
 
