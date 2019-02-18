@@ -424,7 +424,7 @@ class DBHelper {
    */
   static postReview(reviewData, callback) {
 
-    fetch('http://localhost:1337/reviews/', {
+    fetch(`${DBHelper.DATABASE_URL}reviews/`, {
       method: 'POST',
       body: JSON.stringify(reviewData),
       headers: new Headers({
@@ -465,7 +465,7 @@ class DBHelper {
    */
   static toggleFavorite(restaurant, callback) {
 
-    fetch(`http://localhost:1337/restaurants/${restaurant.id}/?is_favorite=${restaurant.is_favorite}`, {method: 'PUT'})
+    fetch(`${DBHelper.DATABASE_URL}restaurants/${restaurant.id}/?is_favorite=${restaurant.is_favorite}`, {method: 'PUT'})
       .then(response => {
       if (response.status !== 200) {
         const error = 'Looks like there was a problem. Status Code: ' + response.status;
@@ -494,7 +494,7 @@ class DBHelper {
    * Restaurant image URL.
    */
   static imageUrlForRestaurant(restaurant) {
-    return restaurant.photograph ? `img/${restaurant.photograph}.webp` : 'img/image-error.svg';
+    return restaurant.photograph ? `./img/${restaurant.photograph}.webp` : './img/image-error.svg';
   }
 
   /**
