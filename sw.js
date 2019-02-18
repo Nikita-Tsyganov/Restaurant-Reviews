@@ -1,5 +1,5 @@
-importScripts('/js/idb.js');
-importScripts('/js/dbhelper.js');
+importScripts('./js/idb.js');
+importScripts('./js/dbhelper.js');
 
 const staticCacheName = 'rr-static-v1';
 
