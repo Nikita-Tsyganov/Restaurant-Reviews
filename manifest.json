@@ -3,64 +3,64 @@
   "name": "Restaurants Review",
   "icons": [
     {
-      "src": "launcher-icon-48x48.png",
+      "src": "icons/launcher-icon-48x48.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "launcher-icon-96x96.png",
+      "src": "icons/launcher-icon-96x96.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "launcher-icon-128x128.png",
+      "src": "icons/launcher-icon-128x128.png",
       "type": "image/png",
       "sizes": "128x128"
     },
     {
-      "src": "launcher-icon-144x144.png",
+      "src": "icons/launcher-icon-144x144.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "launcher-icon-152x152.png",
+      "src": "icons/launcher-icon-152x152.png",
       "type": "image/png",
       "sizes": "152x152"
     },
     {
-      "src": "launcher-icon-192x192.png",
+      "src": "icons/launcher-icon-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "launcher-icon-256x256.png",
+      "src": "icons/launcher-icon-256x256.png",
       "type": "image/png",
       "sizes": "256x256"
     },
     {
-      "src": "launcher-icon-320x320.png",
+      "src": "icons/launcher-icon-320x320.png",
       "type": "image/png",
       "sizes": "320x320"
     },
     {
-      "src": "launcher-icon-384x384.png",
+      "src": "icons/launcher-icon-384x384.png",
       "type": "image/png",
       "sizes": "384x384"
     },
 	{
-      "src": "launcher-icon-448x448.png",
+      "src": "icons/launcher-icon-448x448.png",
       "type": "image/png",
       "sizes": "448x448"
     },
     {
-      "src": "launcher-icon-512x512.png",
+      "src": "icons/launcher-icon-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "start_url": "index.html",
   "background_color": "#fdfdfd",
-  "theme_color": "orange",
+  "theme_color": "#C0407F",
   "display": "standalone",
   "orientation": "portrait"
 }

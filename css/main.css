@@ -6,13 +6,14 @@
   --light-lighten-color: white;
   --light-color: #fdfdfd;
   --light-darken-color: #f3f3f3;
-  --theme-color: orange;
-  --theme-darken-color: #f18200;
+  --theme-color: #c0407f;
+  --theme-darken-color: #ad3972;
   --border-light-color: #fff;
   --border-dark-color: #d9d9d9;
   --nav-bg-color: #252831;
   --breadcrumb-bg-color: #eee;
-  --footer-color: #aaa;
+  --footer-color: #bbb;
+  --footer-color-link: #e2a7c4;
   --footer-bg-color: #444;
   --solid-gray-color: #ccc;
   --solid-black-color: black;
@@ -21,6 +22,8 @@
   --restaurant-hours-color: #666;
   --text-shadow-color: #666;
   --theme-headers-text-shadow-color: #ddd;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  --box-shadow-large: 10px 10px 10px rgba(0, 0, 0, 0.26);
 }
 
 
@@ -48,7 +51,7 @@ header {
   right: 0;
   left: 0;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
 }
 
 
@@ -110,7 +113,7 @@ section {
 }
 
 
-#maincontent {
+#main-content {
   background-color: var(--light-darken-color);
   min-height: 100%;
   margin-top: 80px;
@@ -125,6 +128,17 @@ section {
   padding: 25px;
   text-align: center;
   text-transform: uppercase;
+}
+
+
+#footer a {
+  color: var(--footer-color-link);
+}
+
+
+#footer a:hover,
+#footer a:focus {
+  color: var(--theme-darken-color);
 }
 
 
@@ -143,8 +157,7 @@ section {
   text-decoration: none;
   text-transform: uppercase;
   border-radius: 20px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-  text-shadow: 1px 1px var(--text-shadow-color);
+  box-shadow: var(--box-shadow);
 }
 
 
@@ -153,7 +166,7 @@ section {
   outline: none;
   text-decoration: none;
   background-color: var(--theme-darken-color);
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow-large);
   transform: scale(1.1);
 }
 
@@ -206,7 +219,7 @@ nav h1 a {
   height: 40vh;
   width: 100%;
   background-color: var(--solid-gray-color);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
 }
 
 
@@ -216,17 +229,16 @@ nav h1 a {
 .filter-options {
   background-color: var(--light-color);
   align-items: center;
-  padding-left: 8px;
+  padding: 30px 0 30px 8px;
 }
 
 
 .filter-options h2 {
-  text-shadow: 1px 1px var(--solid-black-color);
   color: var(--theme-color);
   font-size: 2rem;
   font-weight: normal;
   line-height: 1;
-  margin: 0;
+  margin: 0 0 20px 0;
   padding: 10px 0;
 }
 
@@ -234,7 +246,7 @@ nav h1 a {
 .filter-options select {
   background-color: var(--light-lighten-color);
   border: 1px solid var(--border-dark-color);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
   font-family: Arial,sans-serif;
   font-size: 12pt;
   letter-spacing: 0;
@@ -251,7 +263,8 @@ nav h1 a {
 
 
 #show-map-button {
-  margin: 0 2px 10px 2px;
+  display: block;
+  margin: 30px 2px 10px 2px;
   min-width: 158px;
 }
 
@@ -267,13 +280,13 @@ nav h1 a {
   text-align: center;
   display: flex;
   flex-wrap: wrap;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
 }
 
 
 #restaurants-list li {
   background-color: var(--light-lighten-color);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
   font-family: Arial,sans-serif;
   margin: 15px;
   min-height: 380px;
@@ -285,7 +298,7 @@ nav h1 a {
 
 
 #restaurants-list .restaurant-img {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
   background-color: var(--solid-gray-color);
   display: block;
   margin: 20px 0;
@@ -295,7 +308,6 @@ nav h1 a {
 
 
 #restaurants-list li h3 {
-  text-shadow: 0.5px 0.5px var(--solid-black-color);
   color: var(--theme-color);
   font-family: Arial,sans-serif;
   font-size: 14pt;
@@ -324,7 +336,7 @@ nav h1 a {
   text-decoration: none;
   text-transform: uppercase;
   border-radius: 20px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
   text-shadow: 1px 1px var(--text-shadow-color);
   transition-duration: .3s;
   transition-timing-function: ease-in-out;
@@ -335,7 +347,7 @@ nav h1 a {
 #restaurants-list li a:focus {
   outline: none;
   background-color: var(--theme-darken-color);
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow-large);
   transform: scale(1.1);
 }
 
@@ -380,7 +392,7 @@ nav h1 a {
 
 
 @media screen and (min-width: 1122px) {
-  #maincontent {
+  #main-content {
     width: 1122px;
     margin-left: auto;
     margin-right: auto;

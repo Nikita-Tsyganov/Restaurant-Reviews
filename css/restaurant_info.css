@@ -6,21 +6,26 @@
   --light-lighten-color: white;
   --light-color: #fdfdfd;
   --light-darken-color: #f3f3f3;
-  --theme-color: orange;
-  --theme-darken-color: #f18200;
+  --theme-color: #c0407f;
+  --theme-darken-color: #ad3972;
+  --theme-darken-dark-color: #9a3366;
   --border-light-color: #fff;
   --border-dark-color: #d9d9d9;
   --nav-bg-color: #252831;
   --breadcrumb-bg-color: #eee;
-  --footer-color: #aaa;
+  --footer-color: #bbb;
+  --footer-color-link: #e2a7c4;
   --footer-bg-color: #444;
   --solid-gray-color: #ccc;
   --solid-black-color: black;
+  --connection-problem-color: red;
   --main-font-color: #333;
   --dark-bg-color: #333;
   --restaurant-hours-color: #666;
   --text-shadow-color: #666;
   --theme-headers-text-shadow-color: #ddd;
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  --box-shadow-large: 10px 10px 10px rgba(0, 0, 0, 0.26);
 }
 
 
@@ -48,7 +53,7 @@ header {
   right: 0;
   left: 0;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
 }
 
 
@@ -110,11 +115,11 @@ section {
 }
 
 
-#maincontent {
+#main-content {
   background-color: var(--light-darken-color);
   min-height: 100%;
   margin-top: 131px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
 }
 
 
@@ -126,6 +131,17 @@ section {
   padding: 25px;
   text-align: center;
   text-transform: uppercase;
+}
+
+
+#footer a {
+  color: var(--footer-color-link);
+}
+
+
+#footer a:hover,
+#footer a:focus {
+  color: var(--theme-darken-color);
 }
 
 
@@ -144,8 +160,7 @@ section {
   text-decoration: none;
   text-transform: uppercase;
   border-radius: 20px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
-  text-shadow: 1px 1px var(--text-shadow-color);
+  box-shadow: var(--box-shadow);
 }
 
 
@@ -154,7 +169,7 @@ section {
   outline: none;
   text-decoration: none;
   background-color: var(--theme-darken-color);
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow-large);
   transform: scale(1.1);
 }
 
@@ -222,15 +237,14 @@ nav h1 a {
 
 /* Add a color to all links inside the list */
 #breadcrumb li a {
-    text-shadow: 0.5px 0.5px var(--solid-black-color);
-    color: var(--theme-color);
+    color: var(--theme-darken-color);
     text-decoration: none;
 }
 
 
 /* Add a color on mouse-over */
 #breadcrumb li a:hover {
-    color: var(--theme-darken-color);
+    color: var(--theme-darken-dark-color);
     text-decoration: underline;
 }
 
@@ -255,7 +269,6 @@ nav h1 a {
 
 
 #restaurant-name {
-  text-shadow: 1px 1px var(--solid-black-color);
   color: var(--theme-color);
   font-family: Arial,sans-serif;
   font-size: 20pt;
@@ -271,7 +284,7 @@ nav h1 a {
 
 #restaurant-overview {
   border-radius: 0 50px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
   overflow: hidden;
   margin-bottom: 20px;
   width: 100%;
@@ -383,7 +396,6 @@ nav h1 a {
 
 
 #reviews-container h3 {
-  text-shadow: 1px 1px var(--solid-black-color);
   color: var(--theme-color);
   font-size: 24pt;
   font-weight: 300;
@@ -457,7 +469,7 @@ nav h1 a {
 
 
 #connection-problem-alert {
-  color: red;
+  color: var(--connection-problem-color);
 }
 
 
@@ -482,7 +494,7 @@ nav h1 a {
 
 #reviews-list li {
   background-color: var(--light-lighten-color);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
   display: block;
   list-style-type: none;
   margin: 0 0 30px;
@@ -509,12 +521,11 @@ nav h1 a {
 
 .review-rating {
   display: inline;
-  padding: 5px;
-  border-radius: 0 10px;
+  padding: 6px 10px;
+  border-radius: 10px 0;
   color: var(--light-lighten-color);
   background-color: var(--theme-color);
-  text-shadow: 1px 1px var(--text-shadow-color);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  box-shadow: var(--box-shadow);
 }
 
 
@@ -633,7 +644,7 @@ nav h1 a {
 
 
 @media screen and (min-width: 1122px) {
-  #maincontent {
+  #main-content {
     width: 1122px;
     margin-left: auto;
     margin-right: auto;

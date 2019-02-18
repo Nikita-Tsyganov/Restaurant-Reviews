@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const script = document.createElement('script');
     script.setAttribute('async', 'true');
     script.setAttribute('defer', 'true');
-    script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBovvqHEV47g60VbcHW6auvSoaHxMhHQ2A&libraries=places&callback=initMap');
+    script.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBGmdiqzahVQpOBRZwTI9In1g7kErNASWU&libraries=places&callback=initMap');
     const lastScript = document.querySelector('script[src="js/main.js"]');
     lastScript.parentNode.insertBefore(script, lastScript.nextSibling);
   });
