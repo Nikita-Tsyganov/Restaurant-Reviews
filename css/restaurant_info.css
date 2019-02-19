@@ -356,13 +356,14 @@ nav h1 a {
 
 
 #favorite-toggle-button-container {
+  display: flex;
+  justify-content: flex-end;
   width: 50%;
   min-width: 55px;
 }
 
 
 #favorite-button {
-  float: right;
   margin-top: -20px;
   padding: 0;
   background: 0;
@@ -411,24 +412,21 @@ nav h1 a {
 
 
 #form-toggle-button-container {
+  display: flex;
+  justify-content: flex-end;
   width: 50%;
   min-width: 190px;
   margin-top: -10px;
 }
 
 
-.form-toggle-button-container-min-width {
-  min-width: 110px !important;
-}
-
-
-#form-toggle-button {
-  float: right;
+#form-submit-button-container {
+  display: flex;
+  justify-content: flex-end;
 }
 
 
 #submit-button {
-  float: right;
   margin: -10px 2em 10px 0;
 }
 
@@ -540,7 +538,6 @@ nav h1 a {
 
 .review-name {
   color: var(--light-lighten-color);
-  float: left;
   font-size: 1.2rem;
   margin: 1.2em 0 1.2em 2em !important;
   width: calc(50% - 2em);
@@ -549,6 +546,8 @@ nav h1 a {
 
 
 .review-date-container {
+  display: flex;
+  justify-content: flex-end;
   width: calc(50% - 2em);
   min-width: 120px;
   margin: 2em 2em 2em 0 !important;
@@ -557,7 +556,6 @@ nav h1 a {
 
 .review-date {
   color: var(--solid-gray-color);
-  float: right;
   margin: 0 !important;
 }
 
@@ -580,10 +578,6 @@ nav h1 a {
   #favorite-toggle-button-container {
     width: 100%;
   }
-  #favorite-button {
-    float: left;
-    margin-top: 0;
-  }
 }
 
 
@@ -596,9 +590,6 @@ nav h1 a {
     margin-top: 0 !important;
     margin-left: 3em !important;
     width: 100%;
-  }
-  .review-date {
-    float: left;
   }
 }
 
@@ -615,9 +606,6 @@ nav h1 a {
   #reviews-container h3,
   #form-toggle-button-container {
     width: 100%;
-  }
-  #form-toggle-button {
-    float: left;
   }
 }
 
