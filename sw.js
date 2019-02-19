@@ -4,6 +4,29 @@ importScripts('./js/dbhelper.js');
 const staticCacheName = 'rr-static-v1';
 
 
+self.addEventListener('install', function(event) {
+    event.waitUntil(
+        caches.open(staticCacheName).then(function(cache) {
+            return cache.addAll(
+                [
+                    './index.html',
+                    './restaurant.html',
+                    './manifest.json',
+                    './favicon.ico',
+                    './sw.js',
+                    './js/main.js',
+                    './js/restaurant.js',
+                    './js/idb.js',
+                    './js/dbhelper.js',
+                    './css/main.css',
+                    './css/restaurant_info.css',
+                    './img/'
+                ]
+            );
+        })
+    );
+});
+
 self.addEventListener('activate', function(event) {
     event.waitUntil(
         caches.keys().then(function(cacheNames) {
