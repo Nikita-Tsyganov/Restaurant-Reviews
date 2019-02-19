@@ -293,6 +293,8 @@ nav h1 a {
 
 #restaurant-details {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -635,15 +637,12 @@ nav h1 a {
 
 
 @media screen and (min-width: 1066px) {
-  #restaurant-overview,
+  #restaurant-overview {
+    width: 60%;
+  }
   #restaurant-details {
-    width: 50%;
-  }
-  #restaurant-address {
-    margin: 0 0 10px 20px;
-  }
-  #restaurant-hours {
-    margin: 10px 0 0 20px;
+    width: calc(40% - 40px);
+    margin-left: 40px;
   }
 }
 
