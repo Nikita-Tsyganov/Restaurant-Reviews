@@ -509,6 +509,7 @@ nav h1 a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 
@@ -555,7 +556,7 @@ nav h1 a {
 /* ====================== Responsive Breakpoints ====================== */
 
 
-@media screen and (max-width: 396px) {
+@media screen and (max-width: 335px) {
   .review-name {
     margin-bottom: 0 !important;
   }

@@ -109,7 +109,7 @@ fetchRestaurantFromURL = (callback) => {
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
-  const buttonContainer = document.getElementById('restaurant-container');
+  const buttonContainer = document.getElementById('restaurant-header');
   buttonContainer.appendChild(createFavoriteButton());
 
   const address = document.getElementById('restaurant-address');
