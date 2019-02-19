@@ -387,6 +387,7 @@ nav h1 a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -497,7 +498,8 @@ nav h1 a {
 }
 
 
-#reviews-list li p {
+.review-rating,
+.review-comments {
   margin-left: 2em;
   margin-right: 2em;
 }
@@ -509,8 +511,6 @@ nav h1 a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
-  width: 100%;
 }
 
 
@@ -566,6 +566,16 @@ nav h1 a {
   }
 }
 
+@media screen and (max-width: 448px) {
+  #review-form-container .review-name {
+    margin-bottom: 0 !important;
+  }
+  #review-form-container .review-date {
+    margin-top: 0 !important;
+    margin-left: 3em !important;
+  }
+}
+
 
 @media screen and (max-width: 449px) {
   nav h1 a {
@@ -584,7 +594,8 @@ nav h1 a {
 
 
 @media screen and (min-width: 758px) {
-  .review-rating, .review-comments {
+  .review-rating,
+  .review-comments {
     font-size: 1.2em;
   }
 }
