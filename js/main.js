@@ -8,7 +8,7 @@ var markers = [];
  * Registering a Service Worker if supported.
  */
 if ('serviceWorker' in navigator) {
-  var serviceWorkerRegistration = navigator.serviceWorker.register("sw.js");
+  var serviceWorkerRegistration = navigator.serviceWorker.register('sw.js');
 }
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     event.preventDefault();
 
     const showMapButton = event.target;
-    showMapButton.classList.add("fade-away");
+    showMapButton.classList.add('fade-away');
     setTimeout(() => showMapButton.parentNode.removeChild(showMapButton), 300);
 
     const mapContainer = document.getElementById('map-container');
@@ -112,9 +112,9 @@ window.initMap = () => {
     addMarkersToMap();
 
     //Accessibility feature
-    google.maps.event.addListener(self.map, "tilesloaded", function() {
+    google.maps.event.addListener(self.map, 'tilesloaded', function() {
       const iframe = document.querySelector('#map iframe');
-      iframe.title = "Google Maps";
+      iframe.title = 'Google Maps';
     });
   });
 };
@@ -188,7 +188,7 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.setAttribute('data-src', DBHelper.imageUrlForRestaurant(restaurant));
-  image.alt = "Restaurant " + restaurant.name + " with " + restaurant.cuisine_type + " cuisine.";
+  image.alt = `Restaurant ${restaurant.name} with ${restaurant.cuisine_type} cuisine.`;
   li.append(image);
 
   const name = document.createElement('h3');
@@ -206,7 +206,7 @@ createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  more.setAttribute("aria-label", "To the restaurant " + restaurant.name + " page");
+  more.setAttribute('aria-label', `To the restaurant ${restaurant.name} page`);
   li.append(more);
 
   return li;
@@ -262,8 +262,8 @@ function lazyLoad(){
 window.onload = () => {
 
     //Preventing Google Maps from being focused
-    const siteHeader = document.querySelector("header nav h1 a");
-    const neighborhoodsSelect = document.getElementById("neighborhoods-select");
+    const siteHeader = document.querySelector('header nav h1 a');
+    const neighborhoodsSelect = document.getElementById('neighborhoods-select');
     siteHeader.onkeydown = function (event) {
       if(!event.shiftKey && event.keyCode === 9) {
         event.preventDefault();

@@ -5,7 +5,7 @@ var map;
  * Registering a Service Worker if supported.
  */
 if ('serviceWorker' in navigator) {
-    var serviceWorkerRegistration = navigator.serviceWorker.register("sw.js");
+    var serviceWorkerRegistration = navigator.serviceWorker.register('sw.js');
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     event.preventDefault();
 
     const showMapButton = event.target;
-    showMapButton.classList.add("fade-away");
+    showMapButton.classList.add('fade-away');
     setTimeout(() => showMapButton.parentNode.removeChild(showMapButton), 300);
 
     const mapContainer = document.getElementById('map-container');
@@ -48,9 +48,9 @@ window.initMap = () => {
 
     DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
 
-    google.maps.event.addListener(self.map, "tilesloaded", function() {
+    google.maps.event.addListener(self.map, 'tilesloaded', function() {
       const iframe = document.querySelector('#map iframe');
-      iframe.title = "Google Maps";
+      iframe.title = 'Google Maps';
     });
   });
 };
@@ -80,7 +80,7 @@ fetchRestaurantFromURL = (callback) => {
       fillBreadcrumb()
           .then(
             aElement => {
-              const favoriteButton = document.getElementById("favorite-button");
+              const favoriteButton = document.getElementById('favorite-button');
               aElement.onkeydown = function (event) {
                   if(!event.shiftKey && event.keyCode === 9) {
                       event.preventDefault();
@@ -118,11 +118,11 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.alt = "Restaurant " + restaurant.name;
+  image.alt = `Restaurant ${restaurant.name}`;
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
-  cuisine.setAttribute("aria-label", "The restaurant's cuisine is " + restaurant.cuisine_type);
+  cuisine.setAttribute('aria-label', `The restaurant's cuisine is ${restaurant.cuisine_type}`);
 
   // fill operating hours
   if (restaurant.operating_hours) {
@@ -164,39 +164,39 @@ createFavoriteButton = (restaurant = self.restaurant) => {
   favoriteButton.setAttribute('aria-checked', restaurant.is_favorite.toString());
   favoriteButton.innerHTML = restaurant.is_favorite.toString() === 'true' ? '❤️' : '🖤';
 
-  favoriteButton.addEventListener("focusout", (event) => {
-    event.target.classList.remove("outline-remove");
+  favoriteButton.addEventListener('focusout', (event) => {
+    event.target.classList.remove('outline-remove');
   });
 
-  favoriteButton.addEventListener("mouseenter", (event) => {
-    event.target.classList.add("outline-remove");
+  favoriteButton.addEventListener('mouseenter', (event) => {
+    event.target.classList.add('outline-remove');
 
     if (restaurant.is_favorite.toString() === 'true') {
       event.target.innerHTML = '💔';
     } else event.target.innerHTML = '💖';
   });
 
-  favoriteButton.addEventListener("mouseleave", (event) => {
+  favoriteButton.addEventListener('mouseleave', (event) => {
     if (restaurant.is_favorite.toString() === 'true') {
       event.target.innerHTML = '❤️';
     } else event.target.innerHTML = '🖤';
   });
 
-  favoriteButton.addEventListener("keydown", (event) => {
+  favoriteButton.addEventListener('keydown', (event) => {
 
     if (event.keyCode === 13 || event.keyCode === 32) {
-      event.target.classList.remove("outline-remove");
+      event.target.classList.remove('outline-remove');
     }
   });
 
-  favoriteButton.addEventListener("click", (event) => {
+  favoriteButton.addEventListener('click', (event) => {
     event.preventDefault();
     self.restaurant.is_favorite = self.restaurant.is_favorite.toString() !== 'true';
     favoriteButton.setAttribute('aria-label', self.restaurant.is_favorite.toString() === 'true' ? 'Un-favorite this restaurant' : 'Favorite this restaurant');
     favoriteButton.setAttribute('aria-checked', self.restaurant.is_favorite.toString());
 
-    event.target.classList.add("fade-away");
-    setTimeout(() => event.target.classList.remove("fade-away"), 300);
+    event.target.classList.add('fade-away');
+    setTimeout(() => event.target.classList.remove('fade-away'), 300);
 
     if (restaurant.is_favorite.toString() === 'true') {
       event.target.innerHTML = '❤️';
@@ -225,10 +225,10 @@ createFormToggleButton = () => {
   formToggleButton.classList.add('button');
   formToggleButton.setAttribute('id', 'form-toggle-button');
   formToggleButton.setAttribute('role', 'switch');
-  formToggleButton.setAttribute('aria-checked', "false");
+  formToggleButton.setAttribute('aria-checked', 'false');
   formToggleButton.innerHTML = 'Write a review ▼';
 
-  formToggleButton.addEventListener("click", (event) => {
+  formToggleButton.addEventListener('click', (event) => {
     event.preventDefault();
     const button = event.target;
 
@@ -286,14 +286,14 @@ fillReviewsHTML = () => {
         const connectionProblem = document.createElement('p');
         connectionProblem.setAttribute('id', 'connection-problem-alert');
         connectionProblem.setAttribute('role', 'alert');
-        connectionProblem.innerHTML = `You're currently offline, but we got you covered and as soon as you get online your review will be posted to our server, please do not resubmit.`;
+        connectionProblem.innerHTML = "You're currently offline, but we got you covered and as soon as you get online your review will be posted to our server, please do not resubmit.";
         const closeAlert = document.createElement('a');
         closeAlert.setAttribute('href', '');
         closeAlert.setAttribute('id', 'close-alert');
         closeAlert.setAttribute('role', 'button');
         closeAlert.setAttribute('aria-label', 'Got it. Close the alert.');
         closeAlert.innerHTML = 'Got it';
-        closeAlert.addEventListener("click", (event) => {
+        closeAlert.addEventListener('click', (event) => {
           event.preventDefault();
           document.getElementById('reviews-list').removeChild(event.target.parentNode);
         });
@@ -354,30 +354,30 @@ createReviewHTML = (review) => {
   const li = document.createElement('li');
 
   const header = document.createElement('h4');
-  header.classList.add("review-header");
+  header.classList.add('review-header');
   li.appendChild(header);
 
   const name = document.createElement('p');
   name.innerHTML = review.name;
-  name.classList.add("review-name");
+  name.classList.add('review-name');
   header.appendChild(name);
 
   const dateContainer = document.createElement('div');
   dateContainer.classList.add('review-date-container');
   const date = document.createElement('p');
   date.innerHTML = DBHelper.dateForReview(review);
-  date.classList.add("review-date");
+  date.classList.add('review-date');
   dateContainer.appendChild(date);
   header.appendChild(dateContainer);
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
-  rating.classList.add("review-rating");
+  rating.classList.add('review-rating');
   li.appendChild(rating);
 
   const comments = document.createElement('p');
   comments.innerHTML = review.comments;
-  comments.classList.add("review-comments");
+  comments.classList.add('review-comments');
   li.appendChild(comments);
 
   return li;
@@ -392,11 +392,11 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = window.location.href;
-        a.setAttribute("aria-current", "page");
+        a.setAttribute('aria-current', 'page');
         a.innerHTML =  restaurant.name;
         li.appendChild(a);
         breadcrumb.appendChild(li);
-        a.parentNode === li ? resolve(a) : reject("An error occurred while appending <a> to <li>");
+        a.parentNode === li ? resolve(a) : reject('An error occurred while appending <a> to <li>');
     }).then(aElement => aElement, error => {console.log(error);});
 };
 
