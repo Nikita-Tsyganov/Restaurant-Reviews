@@ -40,8 +40,7 @@ class DBHelper {
           .then(
             function(response) {
               if (response.status !== 200) {
-                const error = 'Looks like there was a problem. Status Code: ' + response.status;
-                console.log(error);
+                const error = DBHelper.logResponseProblem(response);
                 return callback(error, null);
               }
 
@@ -60,9 +59,7 @@ class DBHelper {
               });
             }
           )
-          .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-          });
+          .catch(DBHelper.logFetchError);
       }
     });
   }
@@ -88,8 +85,7 @@ class DBHelper {
           .then(
             function(response) {
               if (response.status !== 200) {
-                const error = 'Looks like there was a problem. Status Code: ' + response.status;
-                console.log(error);
+                const error = DBHelper.logResponseProblem(response);
                 return callback(error, null);
               }
 
@@ -108,9 +104,7 @@ class DBHelper {
               });
             }
           )
-          .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-          });
+          .catch(DBHelper.logFetchError);
       }
     });
   }
@@ -134,8 +128,7 @@ class DBHelper {
           .then(
             function(response) {
               if (response.status !== 200) {
-                const error = 'Looks like there was a problem. Status Code: ' + response.status;
-                console.log(error);
+                const error = DBHelper.logResponseProblem(response);
                 return callback(error, null);
               }
 
@@ -152,9 +145,7 @@ class DBHelper {
               });
             }
           )
-          .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-          });
+          .catch(DBHelper.logFetchError);
       }
     });
   }
@@ -280,8 +271,7 @@ class DBHelper {
           .then(
             function(response) {
               if (response.status !== 200) {
-                const error = 'Looks like there was a problem. Status Code: ' + response.status;
-                console.log(error);
+                const error = DBHelper.logResponseProblem(response);
                 return callback(error, null);
               }
 
@@ -300,9 +290,7 @@ class DBHelper {
               });
             }
           )
-          .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-          });
+          .catch(DBHelper.logFetchError);
       }
     });
   }
@@ -328,8 +316,7 @@ class DBHelper {
           .then(
             function(response) {
               if (response.status !== 200) {
-                const error = 'Looks like there was a problem. Status Code: ' + response.status;
-                console.log(error);
+                const error = DBHelper.logResponseProblem(response);
                 return callback(error, null);
               }
 
@@ -348,9 +335,7 @@ class DBHelper {
               });
             }
           )
-          .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-          });
+          .catch(DBHelper.logFetchError);
       }
     });
   }
@@ -394,8 +379,7 @@ class DBHelper {
           .then(
             function(response) {
               if (response.status !== 200) {
-                const error = 'Looks like there was a problem. Status Code: ' + response.status;
-                console.log(error);
+                const error = DBHelper.logResponseProblem(response);
                 return callback(error, null);
               }
 
@@ -412,9 +396,7 @@ class DBHelper {
               });
             }
           )
-          .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-          });
+          .catch(DBHelper.logFetchError);
       }
     });
   }
@@ -432,8 +414,7 @@ class DBHelper {
       })
     }).then(response => {
       if (response.status !== 201) {
-        const error = 'Looks like there was a problem. Status Code: ' + response.status;
-        console.log(error);
+        DBHelper.logResponseProblem(response);
       }
       response.json().then(function(review) {
         DBHelper.dbPromise().then(function(db) {
@@ -446,7 +427,7 @@ class DBHelper {
         return callback(false, review);
       });
     }).catch(function(err) {
-      console.log('Fetch Error :-S', err);
+      DBHelper.logFetchError(err);
 
       reviewData.createdAt = reviewData.updatedAt = new Date();
       DBHelper.dbPromise().then(function(db) {
@@ -468,15 +449,14 @@ class DBHelper {
     fetch(`${DBHelper.DATABASE_URL}restaurants/${restaurant.id}/?is_favorite=${restaurant.is_favorite}`, {method: 'PUT'})
       .then(response => {
       if (response.status !== 200) {
-        const error = 'Looks like there was a problem. Status Code: ' + response.status;
-        console.log(error);
+        DBHelper.logResponseProblem(response);
       }
       response.json().then(function(restaurant) {
         DBHelper.updateRestaurant(restaurant);
         return callback(false);
       });
     }).catch(function(err) {
-      console.log('Fetch Error :-S', err);
+      DBHelper.logFetchError(err);
 
       DBHelper.updateRestaurant(restaurant);
       return callback(true);
@@ -518,6 +498,30 @@ class DBHelper {
       map: map,
       animation: google.maps.Animation.DROP}
     );
+  }
+
+  /**
+   * Logs a fetch error.
+   */
+  static logFetchError(err) {
+    console.log('Fetch Error :-S', err);
+  }
+
+  /**
+   * Logs a response problem (when the response was received but is not considered to be "good").
+   * Returns the logged message.
+   */
+  static logResponseProblem(response) {
+    let problemText = DBHelper.buildResponseProblemString(response);
+    console.log(problemText);
+    return problemText;
+  }
+
+  /**
+   * Builds a text describing that there was a problem with the response and shows its status.
+   */
+  static buildResponseProblemString(response) {
+    return `Looks like there was a problem. Status Code: ${response.status}`;
   }
 
 }
