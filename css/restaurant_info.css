@@ -559,7 +559,7 @@ nav h1 a {
 }
 
 
-#restaurant-hours tr:first-child {
+#restaurant-hours td:first-child {
   padding-right: 20px;
 }
 
