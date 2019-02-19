@@ -109,7 +109,7 @@ fetchRestaurantFromURL = (callback) => {
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
   name.innerHTML = restaurant.name;
-  const buttonContainer = document.getElementById('favorite-toggle-button-container');
+  const buttonContainer = document.getElementById('restaurant-container');
   buttonContainer.appendChild(createFavoriteButton());
 
   const address = document.getElementById('restaurant-address');
@@ -251,8 +251,6 @@ createFormToggleButton = () => {
     const isShown = reviewFormContainer.classList.contains('show');
 
     button.innerHTML = isShown ? 'Hide ▲' : 'Write a review ▼';
-    const buttonContainer = document.getElementById('form-toggle-button-container');
-    buttonContainer.classList.toggle('form-toggle-button-container-min-width');
     button.setAttribute('aria-checked', isShown.toString());
   });
   return formToggleButton;
@@ -270,7 +268,7 @@ protectFromXSS = (value) => {
  */
 fillReviewsHTML = () => {
   const container = document.getElementById('reviews-container');
-  const buttonContainer = document.getElementById('form-toggle-button-container');
+  const buttonContainer = document.getElementById('reviews-header');
   buttonContainer.appendChild(createFormToggleButton());
   const reviewForm = document.getElementById('review-form');
 
@@ -375,13 +373,11 @@ createReviewHTML = (review) => {
   name.classList.add('review-name');
   header.appendChild(name);
 
-  const dateContainer = document.createElement('div');
-  dateContainer.classList.add('review-date-container');
   const date = document.createElement('p');
   date.innerHTML = DBHelper.dateForReview(review);
   date.classList.add('review-date');
-  dateContainer.appendChild(date);
-  header.appendChild(dateContainer);
+
+  header.appendChild(date);
 
   const rating = document.createElement('p');
   rating.innerHTML = `Rating: ${review.rating}`;
