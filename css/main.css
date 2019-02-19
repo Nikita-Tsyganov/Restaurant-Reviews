@@ -156,7 +156,6 @@ section {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  border-radius: 20px 0;
   box-shadow: var(--box-shadow);
 }
 
@@ -335,7 +334,6 @@ nav h1 a {
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
-  border-radius: 20px 0;
   box-shadow: var(--box-shadow);
   text-shadow: 1px 1px var(--text-shadow-color);
   transition-duration: .3s;

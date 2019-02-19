@@ -282,7 +282,6 @@ nav h1 a {
 
 
 #restaurant-overview {
-  border-radius: 0 50px;
   box-shadow: var(--box-shadow);
   overflow: hidden;
   margin-bottom: 20px;
