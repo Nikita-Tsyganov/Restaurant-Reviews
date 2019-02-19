@@ -138,18 +138,31 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
   const hours = document.getElementById('restaurant-hours');
   for (let key in operatingHours) {
-    const row = document.createElement('tr');
+    let restaurantOperatingHours = operatingHours[key].split(', ');
+    let weekDay = key;
 
-    const day = document.createElement('td');
-    day.innerHTML = key;
-    row.appendChild(day);
-
-    const time = document.createElement('td');
-    time.innerHTML = operatingHours[key];
-    row.appendChild(time);
-
-    hours.appendChild(row);
+    for (let hoursLine of restaurantOperatingHours) {
+      hours.appendChild( buildRestaurantHoursTableRow(weekDay, hoursLine) );
+      weekDay = '';
+    }
   }
+};
+
+/**
+ * Create restaurant operating hours HTML table and add it to the webpage.
+ */
+buildRestaurantHoursTableRow = (weekDay, operatingTime) => {
+  const row = document.createElement('tr');
+
+  const day = document.createElement('td');
+  day.innerHTML = weekDay;
+  row.appendChild(day);
+
+  const time = document.createElement('td');
+  time.innerHTML = operatingTime;
+  row.appendChild(time);
+
+  return row;
 };
 
 /**
