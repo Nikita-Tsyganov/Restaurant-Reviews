@@ -1,36 +1,32 @@
-# Mobile Web Specialist Certification Course
----
-#### _Three Stage Course Material Project - Restaurant Reviews_
+# Restaurant Reviews
 
-# Project Overview: Stage 3
+The main project which I have worked on throughout the [Udacity's Mobile Web Specialist Nanodegree](https://www.udacity.com/course/mobile-web-specialist-nanodegree--nd024).
 
-##How to run the project itself
-Please, do not use suggested python server to run my project because it affects the performance dramatically in a bad way.
-<br>
-I use Windows IIS and recommend you to do the same or to pick any other analogue of your choice.
-<br>
-Guide for setting up a server with IIS: https://support.microsoft.com/en-us/help/323972/how-to-set-up-your-first-iis-web-site
-<br>
-Important: use IP address of localhost to set up the server. (127.0.0.1)
+A restaurant reviews website which provides the restaurants' info such as picture, operating hours, location on Google Maps and reviews with the option to add your own reviews.
 
-##How to run a server for project
-Go to:
-<br>
-https://github.com/udacity/mws-restaurant-stage-3
-<br>
-Follow instructions
+For this project, I have incrementally converted a static webpage to a _mobile-ready web application_.
+From a static design that lacks accessibility to a design which is _responsive_ on different sized displays and _accessible_ for screen reader use.
+I have also implemented a _service worker_, _caching_, _indexedDB_ and _deferred update functionality_ to create a _seamless offline experience_ for the users.
 
-##Project state
-I did my best to implement all the required features for stage 3.
-<br>
-Having Google Maps in page load made it impossible to achieve performance score higher than 90.
-<br>
-So my solution was to remove it from page completely and only show when requested by user.
-<br>
-Note: minifying files proved to has little to no impact on performance, but provides additional headaches, so I decided not to go for it.
+## How to install
 
-##My Lighthouse results running project on IIS server
-index.html: https://ibb.co/cwLXZx
-<br>
-restaurant.html: https://ibb.co/jV3mux
+### Run a server
 
+##### Running a server is required for the project to work properly
+
+Just go to [this repository](https://github.com/Nikita-Tsyganov/Restaurant-Reviews-Server) and follow the instructions
+
+### Open the website
+
+##### Couldn't be easier
+
+Just click [here](https://nikita-tsyganov.github.io/Restaurant-Reviews/)
+
+Or download the repository and run it from your machine in your favorite fashion (Web Server for Chrome works just fine)
+> You will have to use your own Google Maps API Key then though
+
+## Any remarks, critique, suggestions or questions are more than welcome!
+
+Shoot me an email at [nikita.s.tsyganov@gmail.com](nikita.s.tsyganov@gmail.com)
+
+Or contact me through [LinkedIn](https://www.linkedin.com/in/nikita-tsyganov/)
